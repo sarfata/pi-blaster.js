@@ -1,0 +1,16 @@
+{
+	"author": "Thomas Sarlandie <thomas@sarlandie.net>",
+	"name": "pi-blaster.js",
+	"description": "A node.js library for the pi-blaster daemon - Allows PWM control of the raspberry Pi pins",
+	"version": "0.0.1",
+	"main": "pi-blaster.js",
+	"repository": {
+		"type": "git", 
+		"url": "git@github.com:sarfata/pi-blaster.js.git"
+	},
+	"homepage": "https://github.com/sarfata/pi-blaster.js",
+	"bugs": {
+		"url": "https://github.com/sarfata/pi-blaster.js/issues"
+	},
+	"tags": ["raspberry", "pi", "pwm"]
+}
