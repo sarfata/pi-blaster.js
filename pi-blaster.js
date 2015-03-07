@@ -31,6 +31,12 @@ var piblaster = {
 	}
 };
 
+var piblaster = {
+	releasePwm: function(pinNumber) {
+		writeCommand("release " + pinNumber);
+	}
+};
+
 piblaster.export = piblaster.setPwm;
 
 module.exports = piblaster;
