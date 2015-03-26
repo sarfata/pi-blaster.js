@@ -28,10 +28,8 @@ function writeCommand(cmd) {
 var piblaster = {
 	setPwm: function(pinNumber, value) {
 		writeCommand(pinNumber + "=" + value);
-	}
-};
-
-var piblaster = {
+	},
+	
 	releasePwm: function(pinNumber) {
 		writeCommand("release " + pinNumber);
 	}
