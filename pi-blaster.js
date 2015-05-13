@@ -32,7 +32,7 @@ function writeCommand(cmd, callback) {
  * NodeJS library for the {@link https://github.com/sarfata/pi-blaster|pi-blaster daemon.}
  * @module pi-blaster
  */
-module.export = {
+module.exports = {
 	/**
 	 * Set a given pin to a given value
 	 * @memberof module:pi-blaster
