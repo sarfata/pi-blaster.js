@@ -1,9 +1,9 @@
-var fs = require("fs");
+var fs = require('fs');
 /**
  * Default pi-blaster file path
  * @type {string}
  */
-var PI_BLASTER_PATH = "/dev/pi-blaster";
+var PI_BLASTER_PATH = '/dev/pi-blaster';
 /**
  * We need to use write() with a buffer so that we can pass the position=-1 argument.
  * This is needed, otherwise we get an error because node default write tries to seek
@@ -12,8 +12,8 @@ var PI_BLASTER_PATH = "/dev/pi-blaster";
  * @param {Function} callback Must accept only one optional error parameter
  */
 function writeCommand(cmd, callback) {
-	var buffer = new Buffer(cmd + "\n");
-	var fd = fs.open(PI_BLASTER_PATH, "w", undefined, function(err, fd) {
+	var buffer = new Buffer(cmd + '\n');
+	var fd = fs.open(PI_BLASTER_PATH, 'w', undefined, function(err, fd) {
 		if (err) {
 			if (callback && typeof callback == 'function') {callback(err)};
 		} else {
@@ -28,19 +28,33 @@ function writeCommand(cmd, callback) {
 		}
 	});
 }
+
+/**
+ * Set a given pin to a given value
+ * @memberof module:pi-blaster
+ * @param {Integer} pinNumber Target pin {@link https://github.com/sarfata/pi-blaster/blob/master/pi-blaster.c#L39-51|Known pins}
+ * @param {Float} value Must be between 0 and 1
+ * @param {Function} callback Must accept only one optional error parameter
+ */
+function setPwm(pinNumber, value, callback) {
+	writeCommand(pinNumber + '=' + value, callback);
+}
+
+/**
+ * Release a pin (after release, this pin can be used by others as a regular GPIO pin)
+ * @memberof module:pi-blaster
+ * @param {Integer} pinNumber Target pin {@link https://github.com/sarfata/pi-blaster/blob/master/pi-blaster.c#L39-51|Known pins}
+ * @param {Function} callback Must accept only one optional error parameter
+ */
+function release(pinNumber, callback) {
+	writeCommand('release ' + pinNumber, callback);
+}
+
 /**
  * NodeJS library for the {@link https://github.com/sarfata/pi-blaster|pi-blaster daemon.}
  * @module pi-blaster
  */
 module.exports = {
-	/**
-	 * Set a given pin to a given value
-	 * @memberof module:pi-blaster
-	 * @param {Integer} pinNumber Target pin {@link https://github.com/sarfata/pi-blaster/blob/master/pi-blaster.c#L39-51|Known pins}
-	 * @param {Float} value Must be between 0 and 1
-	 * @param {Function} callback Must accept only one optional error parameter
-	 */
-	setPwm: function(pinNumber, value, callback) {
-		writeCommand(pinNumber + "=" + value, callback);
-	}
+	setPwm: setPwm,
+	release: release
 }
