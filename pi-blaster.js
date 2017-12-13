@@ -21,7 +21,9 @@ function writeCommand(cmd, callback) {
 				if (error) {
 					if (callback && typeof callback == 'function') {callback(error)};
 				} else {
-					fs.close(fd);
+					fs.close(fd, function (err) {
+						if (err) callback (err);
+					});
 					if (callback && typeof callback == 'function') {callback()};
 				}
 			});
